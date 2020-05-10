@@ -127,9 +127,9 @@ body {
         <path style="fill:none;stroke:#000000;stroke-width:2" d="m 38.391765,17.110953 -16.66751,16.667516 -7.81073,-7.201053 c -2.56639,-2.366065 -3.80148,-3.574166 -6.56097,-5.722314 l -4.6426304,-1.736535"/>
       </svg>
       <form class="form" action="">
-        <input class="input" type="email" id="email" required>
-        <input class="input" type="name" id="name" required>
-        <input class="input" type="comment" id="comment">
+        <input class="input" type="email" id="email" placeholder="someone@example.com" required>
+        <input class="input" type="name" id="name" placeholder="John Tan" required>
+        <input class="input" type="comment" id="comment" placeholder="Comments are optional">
 
       </form>
 
@@ -142,7 +142,7 @@ body {
         input = document.querySelector('.input'),
         line2 = document.querySelector('.line2');
         button = document.getElementById("button")
-  var regexString = new RegExp("@"); // super super simple form validation
+  var regexString = new RegExp("@"); // super super super simple form validation
   var quotes = ["Mothers is like a flower, each one beautiful and unique",
                 "Behind all my stories is always your story because yours is where mine begin",
                 "All I am I owe to you!",
@@ -179,13 +179,17 @@ body {
         });
 
   document.getElementById("button").addEventListener('click', () =>{
-    if (!document.getElementById("name").value || !document.getElementById("email").value || !regexString.test((document.getElementById("email").value))) {
+    if (!document.getElementById("name").value || !document.getElementById("email").value) {
       alert("Please ensure that both the name and email field is filled up!");
     } else {
-      button.blur();
-      input.blur();
-      document.querySelector('.line').style.opacity = 1;
-      card.classList.add('saving');
+      if (!regexString.test((document.getElementById("email").value))) {
+        alert("Invalid Email Address!");
+      } else {
+        button.blur();
+        input.blur();
+        document.querySelector('.line').style.opacity = 1;
+        card.classList.add('saving');
+      }
     }
 
 
@@ -204,7 +208,7 @@ body {
         var mailtolink = `mailto:${email}?subject=Happy Mother's Day&body=${body}`;
         //getCOMMENT.value = body;
         location.href = mailtolink.toString();
-      }, 2000);  
+      }, 2000);
     }, 1000);
   });
 
